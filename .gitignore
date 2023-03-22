@@ -3,3 +3,4 @@
 /input*
 /test_data/*.fa
 /plots/*.png
+plots_legacy
