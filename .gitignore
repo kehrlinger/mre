@@ -2,3 +2,4 @@
 /logs*
 /input*
 /test_data/*.fa
+/plots/*.png
