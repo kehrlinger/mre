@@ -15,6 +15,7 @@ def create_stat_dict(input_directory):
     for file in list_of_samples_and_ROI:
         if ".fa" not in file and ".fasta" not in file:
             continue
+        print(file)
         sample_ID = file[:-10].split("_")[0]
         gene_name = file[:-10].split("_")[1]
         dict_of_lengths[ (sample_ID, gene_name) ] = {}
@@ -29,8 +30,7 @@ def create_stat_dict(input_directory):
                     ROI_end = int(read_id_and_ROI_coordinates[2])
                     length_of_alignment_to_ROI = ROI_end - ROI_start
                     if length_of_alignment_to_ROI < 0:
-                        print (file)
-                        print(line)
+                        print (file, line)
                     dict_of_lengths[ (sample_ID, gene_name) ][read_ID] = length_of_alignment_to_ROI
             fh_input.close()
 

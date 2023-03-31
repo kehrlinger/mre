@@ -1,45 +1,71 @@
 #!/usr/bin/env python3
 
-import matplotlib.pyplot as plot
+import argparse
+import matplotlib.pyplot as plt
+
+def make_hist(data, title, filename):
+    pass
 
 def main():
-    fin = open("/groups/bi-marvl/klaus/mre/output/a_results.txt")
+    parser = argparse.ArgumentParser(description="input_file ancestry_table")
+    parser.add_argument("input_file", type=str)
+    parser.add_argument("ancestry_table", type=str)
+    args = parser.parse_args()
 
-    gene_lengths = {}
-    ancestry_gene_lengths = {}
+    input_file = args.input_file
+    ancestry_table = args.ancestry_table
 
-    # read sample -> ancestry dict
+    sample_to_ancestry = {}           # { sample -> ancestry }
+    ancestries_regions_lengths = {}   # { ancestry -> { region -> [ lengths ] } }
+    regions_lengths = {}              # { region -> [ lengths ] }
 
-    for line in fin:
-        items = line.strip().split()
-        if len(items) != 3:
-            continue
+    # populate sample_to_ancestry
+    # and initialize first level of ancestries_regions_lengths
 
-        (sample, gene, lengths) = items
-        # sample -> ancestry
+    with open(ancestry_table, "r") as fh_input_ancestry:
+        for line in fh_input_ancestry:
+            (sample, ancestry) = line.strip().split()
+            sample_to_ancestry[sample] = ancestry
+            ancestries_regions_lengths[ancestry] = {}
 
-        lengths = [ int(x) for x in lengths.split(",") ]
+        fh_input_ancestry.close()
 
-        if gene not in gene_lengths:
-            gene_lengths[gene] = []
+    # read length data, populate regions_lengths
+    # and ancestries_regions_lengths
 
-        gene_lengths[gene].extend( lengths )
+    with open(input_file, "r") as fh_input:
+        for line in fh_input:
+            items = line.strip().split()
+            if len(items) != 3:
+                continue
 
-    fin.close()
+            (sample, region, lengths) = items
+            lengths = [ int(x) for x in lengths.split(",") ]
+            ancestry = sample_to_ancestry[sample]
 
-    for gene in gene_lengths.keys():
-        genedata = gene_lengths[gene]
+            # add to regions_lengths
+            if region not in regions_lengths:
+                regions_lengths[region] = []
 
-        histrange = ( min(genedata), max(genedata) )
-        histrange = (1000, 6000)
+            regions_lengths[region].extend(lengths)
 
-        plot.hist(genedata, bins=100, range=histrange)
-        plot.suptitle(gene)
-        plot.show()
-        # plot.yscale("log")
-        #plot.savefig("plot_{}.png".format(gene))
-        #plot.close()
+            # add to ancestries_regions_lengths
+            if region not in ancestries_regions_lengths[ancestry]:
+                ancestries_regions_lengths[ancestry][region] = []
 
-if __name__ == "__main__":
+            ancestries_regions_lengths[ancestry][region].extend(lengths)
+
+        fh_input.close()
+
+    # plot
+
+    for (region, lengths) in regions_lengths.items():
+        # NOTE: f"plot_{region}.png" is the same as "plot_{}.png".format(region)
+        make_hist(lengths, region, f"plot_{region}.png")
+
+    for (ancestry, regions) in ancestries_regions_lengths.items():
+        for (region, lengths) in regions.items():
+            make_hist(lengths, f"{ancestry} {region}", f"plot_{ancestry}_{region}.png")
+
+if __name__ == '__main__':
     main()
-
