@@ -42,7 +42,7 @@ def write_dict_to_file(input_directory, dict_of_lengths):
     with open(input_directory + "a_results.txt", "w") as fh_output:
         # sample == (sample_ID, gene_name)
         for sample, dict in dict_of_lengths.items():
-            output_string = str(sample[0]) + "\t" + str(sample[1] + "\t")
+            output_string = str(sample[0]) + "\t" + str(sample[1] + "\t") # testcomment for git
             for read in dict:
                 alignment_length = str(dict[read])
                 output_string += alignment_length
