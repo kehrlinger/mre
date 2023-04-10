@@ -15,7 +15,6 @@ def create_stat_dict(input_directory):
     for file in list_of_samples_and_ROI:
         if ".fa" not in file and ".fasta" not in file:
             continue
-        print(file)
         sample_ID = file[:-10].split("_")[0]
         gene_name = file[:-10].split("_")[1]
         dict_of_lengths[ (sample_ID, gene_name) ] = {}
@@ -29,8 +28,13 @@ def create_stat_dict(input_directory):
                     ROI_start = int(read_id_and_ROI_coordinates[1])
                     ROI_end = int(read_id_and_ROI_coordinates[2])
                     length_of_alignment_to_ROI = ROI_end - ROI_start
+                    
+                    # Write out the negative and suspiciously long reads:
                     if length_of_alignment_to_ROI < 0:
-                        print (file, line)
+                        print(file, line)
+                    if length_of_alignment_to_ROI > 7000:
+                        print(file, line)
+                    
                     dict_of_lengths[ (sample_ID, gene_name) ][read_ID] = length_of_alignment_to_ROI
             fh_input.close()
 
@@ -66,7 +70,7 @@ def main():
 
     # file_stats[ (sample_ID, gene_name) ]:{read_ID: length_of_alignment_to_ROI}
     file_stats = create_stat_dict(input_dir)
-    #write_dict_to_file(input_dir, file_stats)
+    write_dict_to_file(input_dir, file_stats)
     #print_dict(file_stats)
             
 if __name__ == '__main__':

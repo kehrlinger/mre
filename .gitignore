@@ -1,7 +1,8 @@
-/output*
+/output/analysis/*.fa
 /logs*
-/input*
+# /input*
 /test_data/*.fa
 /plots/*.png
 /plots/*/*.png
 /plots/*/*/*.png
+/test_data/HG*

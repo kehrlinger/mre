@@ -42,6 +42,7 @@ def main():
                     reads[pileupread.alignment.query_name][1] = pileupread.query_position_or_next
                 except:
                     continue
+
     # Filter reads that do not completely span the ROI
     todelete = set()   
     for read in reads:
@@ -51,7 +52,7 @@ def main():
         del reads[r]
 
     for read in reads:
-        print(">%s %s %s\n%s" % (read, reads[read][0], reads[read][1], reads[read][2]))
+        print(">%s %s %s\n%s" % (read, reads[read][0], reads[read][1], reads[read][2])) 
 
 if __name__ == '__main__':
     main()
