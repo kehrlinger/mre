@@ -30,10 +30,10 @@ def create_stat_dict(input_directory):
                     length_of_alignment_to_ROI = ROI_end - ROI_start
                     
                     # Write out the negative and suspiciously long reads:
-                    if length_of_alignment_to_ROI < 0:
-                        print(file, line)
-                    if length_of_alignment_to_ROI > 7000:
-                        print(file, line)
+                    if length_of_alignment_to_ROI < 1000:
+                        print(file, read_ID, length_of_alignment_to_ROI)
+                    if length_of_alignment_to_ROI > 6100:
+                        print(file, read_ID, length_of_alignment_to_ROI)
                     
                     dict_of_lengths[ (sample_ID, gene_name) ][read_ID] = length_of_alignment_to_ROI
             fh_input.close()
@@ -70,7 +70,7 @@ def main():
 
     # file_stats[ (sample_ID, gene_name) ]:{read_ID: length_of_alignment_to_ROI}
     file_stats = create_stat_dict(input_dir)
-    write_dict_to_file(input_dir, file_stats)
+    #write_dict_to_file(input_dir, file_stats)
     #print_dict(file_stats)
             
 if __name__ == '__main__':

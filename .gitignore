@@ -1,4 +1,5 @@
 /output/analysis/*.fa
+/output/analysis*
 /logs*
 # /input*
 /test_data/*.fa

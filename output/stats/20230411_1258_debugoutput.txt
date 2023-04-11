@@ -1,0 +1,8 @@
+HG00313_FOCAD1_output.fa >25a82a9d-abf5-4b41-a78e-22a0e222ee74 6349 - obvious
+HG01121_CLASP1_output.fa >9cd5e752-0ae8-4bf5-a334-076407c30c8a 828
+HG01133_CLASP1_output.fa >f4346e13-b092-4175-a4e3-f45d5996ae74 533
+NA19331_FOCAD1_output.fa >13458565-ac30-44e3-814d-4bb61a460810 525 - large deletion
+NA19669_FOCAD1_output.fa >aa2a0132-ff38-4504-8865-184ea09bfc72 -1181 - two insertions
+NA19675_FOCAD1_output.fa >9893e5e0-507d-4cd4-ad35-deaabb7e8dc9 -3638 - partial alignment bottom left, red
+NA19700_ASB1_output.fa >560dfa7a-b971-4d42-bd0d-0f35f283ac09 -38964
+NA19701_FOCAD1_output.fa >f2fbe310-f884-4299-a0b4-e63cbae0ec12 -8381 - multi insert

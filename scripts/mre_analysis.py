@@ -14,6 +14,7 @@ def main():
     start_arg = args.start
     end_arg = args.end
 
+    # filepath = "/groups/bi-marvl/klaus/mre/test_data/" # for testing on a single sample
     filepath = "/groups/bi-marvl/samples/alignments/GRCh38/"
     reference_path = "/groups/bi-marvl/reference/GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions_v2.fasta"
     samfile = pysam.AlignmentFile(filepath + sample + "/alignments/" + sample + ".cram", "rc", reference_filename=reference_path)
@@ -32,16 +33,23 @@ def main():
         for pileupread in pileupcolumn.pileups:
             if pileupread.alignment.is_supplementary == True:
                 continue
+            #if end - start < 0:
+            #    continue
             # Extract reads that span the beginning of the ROI.
             if pileupcolumn.pos == start:
-                reads[pileupread.alignment.query_name] = [pileupread.query_position_or_next, None, pileupread.alignment.query_sequence]
+                reads[pileupread.alignment.query_name] = [pileupread.query_position_or_next, None, None, None] # Start of ROI on read (+ placeholders for end, length, seq)
+                
                 # pileupread.alignment.query_alignment_sequence would give only the aligned part of the read (in the ROI?)
             # Extract reads that span the ending of the ROI. Reads that do not span the beginning of the ROI give key errors.
             if pileupcolumn.pos == end:
                 try:
-                    reads[pileupread.alignment.query_name][1] = pileupread.query_position_or_next
+                    reads[pileupread.alignment.query_name][1] = pileupread.query_position_or_next # End of ROI on read
+                    reads[pileupread.alignment.query_name][2] = pileupread.query_position_or_next - reads[pileupread.alignment.query_name][0] # Length of ROI on read
+                    reads[pileupread.alignment.query_name][3] = \
+                        pileupread.alignment.query_sequence[reads[pileupread.alignment.query_name][0]:reads[pileupread.alignment.query_name][1]] # Sequence of read on ROI
                 except:
                     continue
+            
 
     # Filter reads that do not completely span the ROI
     todelete = set()   
@@ -52,7 +60,7 @@ def main():
         del reads[r]
 
     for read in reads:
-        print(">%s %s %s\n%s" % (read, reads[read][0], reads[read][1], reads[read][2])) 
+        print(">%s %s %s %s\n%s" % (read, reads[read][0], reads[read][1], reads[read][2], reads[read][3]))
 
 if __name__ == '__main__':
     main()
