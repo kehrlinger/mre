@@ -1,3 +1,15 @@
+#!/usr/bin/env python3
+
+"""
+Usage example:
+time python3 /groups/bi-marvl/klaus/mre/scripts/mre_analysis.py HG00096 chr2 238776000 238778000
+This script extracts nanopore reads that span a specified region in a .cram file, then saves the result in form of a fasta file:
+    >SAMPLE ROI_START ROI_END ROI_LENGTH
+    SEQ
+Usually, this script is invoced with the script mre_analysis.sbatch on the cluster.
+It relies on access to the CBE cluster, since the .cram files are stored there.
+"""
+
 import pysam
 import argparse
 

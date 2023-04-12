@@ -1,9 +1,10 @@
 /output/analysis/*.fa
-/output/analysis*
+/output/analysis_legacy
 /logs*
 # /input*
 /test_data/*.fa
-/plots/*.png
-/plots/*/*.png
-/plots/*/*/*.png
 /test_data/HG*
+/output/plots/*.png
+/output/plots/*/*.png
+/output/plots/*/*/*.png
+/output/test_data/HG*

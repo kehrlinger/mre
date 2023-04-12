@@ -43,6 +43,7 @@ def main():
     gene_to_length = {}
     ancestry_to_gene_to_length = {}
     ancestry_group_to_gene_to_length = {}
+    print(workdir)
 
     with open(ancestry_table, "r") as fh_input_ancestry:
         for sample_group_ancestry in fh_input_ancestry:
@@ -107,7 +108,7 @@ def main():
     c = 0
     for gene, lengths in sorted(gene_to_length.items()):
         plt.hist(lengths, bins=250, range=gene_to_range[gene])
-        plt.savefig(workdir + "/plots/genes/singles/{ftime}_{fgene}.png".format(ftime=timestamp, fgene=gene))
+        plt.savefig(workdir + "/output/plots/genes/singles/{ftime}_{fgene}.png".format(ftime=timestamp, fgene=gene))
         plt.close()
         length_of_gene = gene_to_range[gene][1] - gene_to_range[gene][0]
         number_of_bins = int(length_of_gene / 100)
@@ -118,7 +119,7 @@ def main():
         if mod == 0:
             r += 1
             c = 0
-    figure.savefig(workdir + "/plots/genes/{ftime}_genes.png".format(ftime=timestamp))
+    figure.savefig(workdir + "/output/plots/genes/{ftime}_genes.png".format(ftime=timestamp))
     plt.close()
 
     # Plot ancestry_group plots
@@ -133,7 +134,7 @@ def main():
         r = 0
         for ancestry_group, gene_len_dict in sorted(ancestry_group_to_gene_to_length.items()):
             plt.hist(gene_len_dict[gene], bins=250, range=gene_to_range[gene])
-            plt.savefig(workdir + "/plots/groups/singles/{ftime}_{fgene}_{fancestrygroup}.png".format(ftime=timestamp, fgene=gene, fancestrygroup=ancestry_group))
+            plt.savefig(workdir + "/output/plots/groups/singles/{ftime}_{fgene}_{fancestrygroup}.png".format(ftime=timestamp, fgene=gene, fancestrygroup=ancestry_group))
             plt.close()
             histograms[r][c].set_title(ancestry_group)
             histograms[r][c].hist(gene_len_dict[gene], bins=250, range=gene_to_range[gene])
@@ -142,7 +143,7 @@ def main():
             if mod == 0:
                 r += 1
                 c = 0
-        figure.savefig(workdir + "/plots/groups/{ftime}_{fgene}_groups.png".format(ftime=timestamp, fgene=gene))
+        figure.savefig(workdir + "/output/plots/groups/{ftime}_{fgene}_groups.png".format(ftime=timestamp, fgene=gene))
         plt.close()
 
     # Plot ancestry plots
@@ -157,7 +158,7 @@ def main():
         c = 0
         for ancestry, gene_len_dict in sorted(ancestry_to_gene_to_length.items()):
             plt.hist(gene_len_dict[gene], bins=250, range=gene_to_range[gene])
-            plt.savefig(workdir + "/plots/ancestries/singles/{ftime}_{fgene}_{fancestry}.png".format(ftime=timestamp, fgene=gene, fancestry=ancestry))
+            plt.savefig(workdir + "/output/plots/ancestries/singles/{ftime}_{fgene}_{fancestry}.png".format(ftime=timestamp, fgene=gene, fancestry=ancestry))
             plt.close()
             histograms[r][c].set_title(ancestry)
             histograms[r][c].hist(gene_len_dict[gene], bins=250, range=gene_to_range[gene])
@@ -166,7 +167,7 @@ def main():
             if mod == 0:
                 r += 1
                 c = 0
-        figure.savefig(workdir + "/plots/ancestries/{ftime}_{fgene}_ancestries.png".format(ftime=timestamp, fgene=gene))
+        figure.savefig(workdir + "/output/plots/ancestries/{ftime}_{fgene}_ancestries.png".format(ftime=timestamp, fgene=gene))
         plt.close()
         
 if __name__ == '__main__':
