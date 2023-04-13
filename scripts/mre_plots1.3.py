@@ -23,13 +23,15 @@ def set_plot_fonts():
 
 def main():
     """
-    Accepts a tab delimited input file as argument which contains:
-    sample_name GOI length,length,
-    HG00096	ASB1    2437,2437,
-    This file is produced by the mre_stats.py script. See this file for further explanation.
+    Example usage:
+        time python3 /groups/bi-marvl/klaus/mre/scripts/mre_plots1.3.py /groups/bi-marvl/klaus/mre/output/stats/20230412_results.txt /groups/bi-marvl/klaus/mre/input/ancestries_grouped.txt
+    Accepts the tab delimited output file from mre_stats.py as input argument which contains:
+        SAMPLE_NAME ROI CSV_LENGTHS
+        HG00096	ASB1    2437,2437,
     Additionally, a file (ancestries.txt) containing sample_id with corresponding ancestries is accepted as a second argument:
-    HG00096	GBR
-    HG00098	GBR
+        SAMPLE ANCESTRY_GROUP
+        HG00096	GBR
+        HG00098	GBR
     The output of this script are histogram plots showing the length distribution of reads within a single ancestry at a single GOI.
     """
     parser = argparse.ArgumentParser(description="input_file ancestry_table")
@@ -43,7 +45,6 @@ def main():
     gene_to_length = {}
     ancestry_to_gene_to_length = {}
     ancestry_group_to_gene_to_length = {}
-    print(workdir)
 
     with open(ancestry_table, "r") as fh_input_ancestry:
         for sample_group_ancestry in fh_input_ancestry:

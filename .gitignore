@@ -1,7 +1,10 @@
 /output/analysis/*.fa
+/output/sorted_reads/*.fa
 /output/analysis_legacy
+/output/msa/*.fa
+/output/consensus/*.fa
 /logs*
-# /input*
+/input/phase
 /test_data/*.fa
 /test_data/HG*
 /output/plots/*.png
