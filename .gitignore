@@ -1,7 +1,7 @@
 /output/analysis/*.fa
 /output/sorted_reads/*.fa
 /output/analysis_legacy
-/output/msa/*.fa
+/output/msa/*
 /output/consensus/*.fa
 /logs*
 /input/phase
