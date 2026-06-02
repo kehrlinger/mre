@@ -1,13 +1,2 @@
-/output/analysis/*.fa
-/output/sorted_reads/*.fa
-/output/analysis_legacy
-/output/msa/*
-/output/consensus/*.fa
-/logs*
-/input/phase
-/test_data/*.fa
-/test_data/HG*
-/output/plots/*.png
-/output/plots/*/*.png
-/output/plots/*/*/*.png
-/output/test_data/HG*
+__pycache__/
+*.pyc
