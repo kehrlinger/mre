@@ -2,6 +2,8 @@
 
 A screening pipeline that uses existing Oxford Nanopore long-read sequencing data from the 1000 Genomes Project to identify samples carrying specific copies of three genes of interest. Work done at the Research Institute of Molecular Pathology (IMP), Vienna, in the group of Moritz Gaidt.
 
+Note: This repo was updated in 2026 with Hermes Agent to test AI-assisted repository maintenance. The original content and structure have been preserved.
+
 ## Background
 
 The lab had just completed the Nanopore sequencing effort for the 1000 Genomes Project. The CRAM alignments were fresh and the physical Coriell cell-line samples were still in the freezer. When constructs of ASB1, FOCAD1, and CLASP1 were needed for cloning, the question was: which of these samples carry a homozygous, single-allele version of the target gene?
