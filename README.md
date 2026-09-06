@@ -1,3 +1,5 @@
+> **[DEPRECATED]** This repository is no longer maintained here. It has moved to https://forgejo.kehrl.org/Kehrl/mre
+
 # MRE — Nanopore Read-Length Screening for Cloning Candidate Selection
 
 A screening pipeline that uses existing Oxford Nanopore long-read sequencing data from the 1000 Genomes Project to identify samples carrying specific copies of three genes of interest. Work done at the Research Institute of Molecular Pathology (IMP), Vienna, in the group of Moritz Gaidt.
